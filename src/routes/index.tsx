@@ -228,23 +228,8 @@ function ComboOptions() {
           ))}
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {combos.map((p) => (
-            <div key={p.title} className="group relative rounded-2xl overflow-hidden bg-white/5 border border-white/10 backdrop-blur flex flex-col">
-              <div className="aspect-[2/3] overflow-hidden bg-plum-deep">
-                <img src={p.image} alt={p.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              </div>
-              <div className="p-5 flex flex-col flex-1">
-                <h3 className="font-display text-lg text-white leading-tight">{p.title}</h3>
-                <p className="mt-2 text-sm text-white/70 leading-relaxed flex-1">{p.blurb}</p>
-                <div className="mt-4 flex items-baseline gap-2">
-                  <span className="font-display text-2xl text-rose-gold-light">{p.price}</span>
-                  {p.was && <span className="text-sm text-white/50 line-through">{p.was}</span>}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <ComboCarousel combos={combos} />
+
 
         <div className="text-center mt-12">
           <Link to="/shop" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-rose-gold text-plum-deep font-semibold shadow-glow hover:bg-rose-gold-light transition-colors">
