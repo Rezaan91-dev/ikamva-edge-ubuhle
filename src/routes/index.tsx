@@ -1,10 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Sparkles, ShieldCheck, Package, Headphones, Star, Crown } from "lucide-react";
+import { ArrowRight, Sparkles, ShieldCheck, Package, Headphones, Star, Crown, Gift, Truck, BadgeCheck, ShoppingBag } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { FEATURED_CATEGORIES } from "@/lib/categories";
-import { BRANDS } from "@/lib/brands";
 import hero from "@/assets/hero-woman.jpg";
+import comboCover from "@/assets/combo-cover.png.asset.json";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
