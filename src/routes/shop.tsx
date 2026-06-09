@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ShopSidebar } from "@/components/ShopSidebar";
 import { FEATURED_CATEGORIES, SHOP_CATEGORIES } from "@/lib/categories";
+import { BRANDS, groupBrandsByLetter } from "@/lib/brands";
 import { ArrowRight, SlidersHorizontal } from "lucide-react";
 import { useState } from "react";
 
