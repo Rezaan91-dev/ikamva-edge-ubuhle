@@ -1,10 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Sparkles, ShieldCheck, Package, Headphones, Star, Crown } from "lucide-react";
+import { ArrowRight, Sparkles, ShieldCheck, Package, Headphones, Star, Crown, Gift, Truck, BadgeCheck, ShoppingBag } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { FEATURED_CATEGORIES } from "@/lib/categories";
-import { BRANDS } from "@/lib/brands";
 import hero from "@/assets/hero-woman.jpg";
+import comboCover from "@/assets/combo-cover.png.asset.json";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -28,7 +29,7 @@ function Index() {
       <Marquee />
       <Categories />
       <WhyShop />
-      <BrandTeaser />
+      <ComboOptions />
       <Testimonials />
       <Newsletter />
       <SiteFooter />
@@ -173,30 +174,76 @@ function WhyShop() {
   );
 }
 
-function BrandTeaser() {
-  const featured = BRANDS.slice(0, 24);
+function ComboOptions() {
+  const perks = [
+    { icon: BadgeCheck, label: "Authentic Products" },
+    { icon: ShoppingBag, label: "Great Value" },
+    { icon: Gift, label: "Perfect Bundles" },
+    { icon: Truck, label: "Fast Nationwide Delivery" },
+  ];
+  const placeholders = [
+    { title: "Hair Care Combo", blurb: "Shampoo, treatment & styling essentials curated for healthy, radiant hair." },
+    { title: "Skincare Ritual Combo", blurb: "Cleanse, hydrate and glow with our hand-picked skincare bundle." },
+    { title: "Everyday Essentials Combo", blurb: "Daily must-haves for body, freshness and confidence on the go." },
+  ];
   return (
-    <section className="mx-auto max-w-7xl px-4 py-20">
-      <div className="text-center max-w-2xl mx-auto mb-10">
-        <p className="font-script text-2xl text-rose-gold mb-1">Discover</p>
-        <h2 className="text-3xl md:text-5xl font-display text-plum-deep">Brands you love, A to Z</h2>
-        <p className="mt-4 text-muted-foreground">From household names to homegrown South African favourites.</p>
-      </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-        {featured.map((b) => (
-          <Link key={b} to="/brands" className="rounded-xl border border-border/60 bg-card px-4 py-5 text-center hover:border-rose-gold hover:bg-blush/40 transition-colors">
-            <span className="font-display text-base text-plum-deep line-clamp-1">{b}</span>
+    <section className="relative overflow-hidden bg-gradient-to-b from-plum-deep via-plum to-plum-deep text-primary-foreground py-20">
+      <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_20%_30%,oklch(0.85_0.1_40/0.45),transparent_55%)]" />
+      <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_80%_70%,oklch(0.75_0.15_350/0.5),transparent_55%)]" />
+      <div className="relative mx-auto max-w-7xl px-4">
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <p className="font-script text-2xl text-rose-gold-light mb-1">More beauty, more value</p>
+          <h2 className="text-3xl md:text-5xl font-display">Combo Options</h2>
+          <p className="mt-4 text-white/80">Bundle &amp; save with our exclusive combos — curated sets that deliver beauty, value and confidence in every box.</p>
+        </div>
+
+        <div className="relative rounded-[2rem] overflow-hidden ring-1 ring-rose-gold/40 shadow-glow mb-10">
+          <img
+            src={comboCover.url}
+            alt="Ikamva Edge Ubuhle Combos — bundle and save with exclusive beauty combos"
+            className="w-full h-auto object-cover"
+            width={1536}
+            height={1024}
+          />
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 mb-12">
+          {perks.map(({ icon: I, label }) => (
+            <div key={label} className="flex items-center gap-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur px-4 py-3">
+              <span className="size-10 shrink-0 rounded-xl bg-gradient-rose text-plum-deep flex items-center justify-center">
+                <I className="size-5" />
+              </span>
+              <span className="text-sm font-medium text-white/90">{label}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-5">
+          {placeholders.map((p) => (
+            <div key={p.title} className="group relative rounded-2xl overflow-hidden bg-white/5 border border-white/10 backdrop-blur p-6 flex flex-col">
+              <div className="aspect-[4/3] rounded-xl bg-gradient-to-br from-plum/60 to-rose-gold/30 border border-white/10 flex items-center justify-center mb-5">
+                <Gift className="size-10 text-rose-gold-light" />
+              </div>
+              <h3 className="font-display text-xl text-white">{p.title}</h3>
+              <p className="mt-2 text-sm text-white/70 leading-relaxed flex-1">{p.blurb}</p>
+              <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold tracking-wider uppercase text-rose-gold-light">
+                Image coming soon
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <Link to="/shop" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-rose-gold text-plum-deep font-semibold shadow-glow hover:bg-rose-gold-light transition-colors">
+            Shop Combos Now <ArrowRight className="size-4" />
           </Link>
-        ))}
-      </div>
-      <div className="text-center mt-8">
-        <Link to="/brands" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-plum text-primary-foreground hover:bg-plum-deep transition-colors font-medium">
-          Explore all {BRANDS.length} brands <ArrowRight className="size-4" />
-        </Link>
+          <p className="mt-4 text-xs tracking-[0.25em] uppercase text-white/60">Beauty made easy · Confidence made you</p>
+        </div>
       </div>
     </section>
   );
 }
+
 
 function Testimonials() {
   const t = [
