@@ -5,6 +5,12 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { FEATURED_CATEGORIES } from "@/lib/categories";
 import hero from "@/assets/hero-woman.jpg";
 import comboCover from "@/assets/combo-cover.png.asset.json";
+import comboShampoo from "@/assets/combo-shampoo.jpg.asset.json";
+import comboHerbal from "@/assets/combo-herbal.jpg.asset.json";
+import comboNeutralising from "@/assets/combo-neutralising.png.asset.json";
+import comboKarseell from "@/assets/combo-karseell.jpg.asset.json";
+import comboBotox from "@/assets/combo-botox.jpg.asset.json";
+import comboAfripure from "@/assets/combo-afripure.jpg.asset.json";
 
 
 export const Route = createFileRoute("/")({
@@ -181,54 +187,29 @@ function ComboOptions() {
     { icon: Gift, label: "Perfect Bundles" },
     { icon: Truck, label: "Fast Nationwide Delivery" },
   ];
-  const placeholders = [
-    { title: "Hair Care Combo", blurb: "Shampoo, treatment & styling essentials curated for healthy, radiant hair." },
-    { title: "Skincare Ritual Combo", blurb: "Cleanse, hydrate and glow with our hand-picked skincare bundle." },
-    { title: "Everyday Essentials Combo", blurb: "Daily must-haves for body, freshness and confidence on the go." },
+  const combos = [
+    { title: "Ultimate Hair Care Combo", blurb: "Neutralising Shampoo, Herbal Shampoo & Coconut Conditioner — 5L each.", price: "R740", was: "R900", image: comboShampoo.url },
+    { title: "Herbal Shampoo & Coconut Conditioner", blurb: "A powerful duo enriched with herbal extracts and coconut oil. 5L each.", price: "R340", was: "R600", image: comboHerbal.url },
+    { title: "Neutralising Shampoo & Coconut Conditioner", blurb: "Cleanse, neutralise and nourish for soft, healthy hair. 5L each.", price: "R340", was: "R600", image: comboNeutralising.url },
+    { title: "Karseell Maca Care Combo", blurb: "Shampoo, Conditioner, Collagen Treatment & Essence Oil — salon quality.", price: "R650", was: "R750", image: comboKarseell.url },
+    { title: "Botox Keratin Treatment Combo", blurb: "Botox Keratin Mask, Neutralising Shampoo, Conditioner & Herbal Shampoo.", price: "R350", image: comboBotox.url },
+    { title: "Afripure Natural Oils Combo", blurb: "Rosemary, Jojoba, Tea Tree, Jamaican Black Castor & Batana hair oils.", price: "R250", was: "R350", image: comboAfripure.url },
   ];
-  return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-plum-deep via-plum to-plum-deep text-primary-foreground py-20">
-      <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_20%_30%,oklch(0.85_0.1_40/0.45),transparent_55%)]" />
-      <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_80%_70%,oklch(0.75_0.15_350/0.5),transparent_55%)]" />
-      <div className="relative mx-auto max-w-7xl px-4">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <p className="font-script text-2xl text-rose-gold-light mb-1">More beauty, more value</p>
-          <h2 className="text-3xl md:text-5xl font-display">Combo Options</h2>
-          <p className="mt-4 text-white/80">Bundle &amp; save with our exclusive combos — curated sets that deliver beauty, value and confidence in every box.</p>
-        </div>
-
-        <div className="relative rounded-[2rem] overflow-hidden ring-1 ring-rose-gold/40 shadow-glow mb-10">
-          <img
-            src={comboCover.url}
-            alt="Ikamva Edge Ubuhle Combos — bundle and save with exclusive beauty combos"
-            className="w-full h-auto object-cover"
-            width={1536}
-            height={1024}
-          />
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 mb-12">
-          {perks.map(({ icon: I, label }) => (
-            <div key={label} className="flex items-center gap-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur px-4 py-3">
-              <span className="size-10 shrink-0 rounded-xl bg-gradient-rose text-plum-deep flex items-center justify-center">
-                <I className="size-5" />
-              </span>
-              <span className="text-sm font-medium text-white/90">{label}</span>
-            </div>
-          ))}
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-5">
-          {placeholders.map((p) => (
-            <div key={p.title} className="group relative rounded-2xl overflow-hidden bg-white/5 border border-white/10 backdrop-blur p-6 flex flex-col">
-              <div className="aspect-[4/3] rounded-xl bg-gradient-to-br from-plum/60 to-rose-gold/30 border border-white/10 flex items-center justify-center mb-5">
-                <Gift className="size-10 text-rose-gold-light" />
+...
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {combos.map((p) => (
+            <div key={p.title} className="group relative rounded-2xl overflow-hidden bg-white/5 border border-white/10 backdrop-blur flex flex-col">
+              <div className="aspect-[2/3] overflow-hidden bg-plum-deep">
+                <img src={p.image} alt={p.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
-              <h3 className="font-display text-xl text-white">{p.title}</h3>
-              <p className="mt-2 text-sm text-white/70 leading-relaxed flex-1">{p.blurb}</p>
-              <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold tracking-wider uppercase text-rose-gold-light">
-                Image coming soon
-              </span>
+              <div className="p-5 flex flex-col flex-1">
+                <h3 className="font-display text-lg text-white leading-tight">{p.title}</h3>
+                <p className="mt-2 text-sm text-white/70 leading-relaxed flex-1">{p.blurb}</p>
+                <div className="mt-4 flex items-baseline gap-2">
+                  <span className="font-display text-2xl text-rose-gold-light">{p.price}</span>
+                  {p.was && <span className="text-sm text-white/50 line-through">{p.was}</span>}
+                </div>
+              </div>
             </div>
           ))}
         </div>
