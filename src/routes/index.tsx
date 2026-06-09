@@ -41,6 +41,7 @@ function Index() {
       <Testimonials />
       <Newsletter />
       <SiteFooter />
+      <PromoPopups />
     </div>
   );
 }
