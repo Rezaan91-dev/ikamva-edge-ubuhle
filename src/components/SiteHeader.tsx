@@ -1,19 +1,35 @@
 import { Link } from "@tanstack/react-router";
-import { Search, ShoppingBag, Heart, User, Menu } from "lucide-react";
+import { Search, ShoppingBag, Heart, User, Menu, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import logo from "@/assets/ikamva-logo.png.asset.json";
+import { BRANDS } from "@/lib/brands";
 
 const NAV = [
-  { to: "/", label: "Home" },
-  { to: "/shop", label: "Shop" },
-  { to: "/brands", label: "Brands" },
-  { to: "/journal", label: "Journal" },
-  { to: "/about", label: "About" },
-  { to: "/contact", label: "Contact" },
+  { to: "/", label: "Home", hasBrands: false },
+  { to: "/shop", label: "Shop", hasBrands: true },
+  { to: "/journal", label: "Journal", hasBrands: false },
+  { to: "/about", label: "About", hasBrands: false },
+  { to: "/contact", label: "Contact", hasBrands: false },
 ] as const;
+
+function groupBrandsByLetter(brands: string[]) {
+  const groups: Record<string, string[]> = {};
+  for (const b of brands) {
+    const letter = b[0]?.toUpperCase() ?? "#";
+    const key = /[A-Z]/.test(letter) ? letter : "#";
+    (groups[key] ||= []).push(b);
+  }
+  return Object.keys(groups)
+    .sort()
+    .map((k) => ({ letter: k, items: groups[k] }));
+}
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [brandsOpen, setBrandsOpen] = useState(false);
+  const [mobileBrandsOpen, setMobileBrandsOpen] = useState(false);
+  const brandGroups = groupBrandsByLetter(BRANDS);
+
   return (
     <header className="sticky top-0 z-40 backdrop-blur-xl bg-background/80 border-b border-border/60">
       <div className="border-b border-border/40 bg-gradient-plum text-primary-foreground/90 text-xs">
@@ -41,15 +57,55 @@ export function SiteHeader() {
 
         <nav className="hidden md:flex items-center gap-7 ml-6 text-sm font-medium">
           {NAV.map((n) => (
-            <Link
+            <div
               key={n.to}
-              to={n.to}
-              className="text-foreground/80 hover:text-plum transition-colors [&.active]:text-plum"
-              activeProps={{ className: "active" }}
-              activeOptions={{ exact: n.to === "/" }}
+              className="relative"
+              onMouseEnter={() => n.hasBrands && setBrandsOpen(true)}
+              onMouseLeave={() => n.hasBrands && setBrandsOpen(false)}
             >
-              {n.label}
-            </Link>
+              <Link
+                to={n.to}
+                className="inline-flex items-center gap-1 text-foreground/80 hover:text-plum transition-colors [&.active]:text-plum"
+                activeProps={{ className: "active" }}
+                activeOptions={{ exact: n.to === "/" }}
+              >
+                {n.label}
+                {n.hasBrands && <ChevronDown className="size-3.5" />}
+              </Link>
+              {n.hasBrands && brandsOpen && (
+                <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 z-50">
+                  <div className="w-[44rem] max-h-[70vh] overflow-y-auto rounded-xl border border-border/60 bg-background shadow-2xl p-5">
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className="font-display text-base text-plum-deep">All Brands</h3>
+                      <Link to="/shop" className="text-xs uppercase tracking-widest text-plum hover:underline">
+                        Shop all
+                      </Link>
+                    </div>
+                    <div className="grid grid-cols-4 gap-x-5 gap-y-4">
+                      {brandGroups.map((g) => (
+                        <div key={g.letter}>
+                          <div className="text-[11px] font-bold tracking-[0.2em] text-rose-gold mb-1.5">
+                            {g.letter}
+                          </div>
+                          <ul className="space-y-1">
+                            {g.items.map((b) => (
+                              <li key={b}>
+                                <Link
+                                  to="/shop"
+                                  className="text-xs text-foreground/75 hover:text-plum transition-colors block truncate"
+                                >
+                                  {b}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
           ))}
         </nav>
 
@@ -84,6 +140,39 @@ export function SiteHeader() {
                 </Link>
               </li>
             ))}
+            <li>
+              <button
+                onClick={() => setMobileBrandsOpen((v) => !v)}
+                className="w-full flex items-center justify-between py-3 text-base text-foreground/90 border-b border-border/40"
+              >
+                <span>Brands</span>
+                <ChevronDown className={`size-4 transition-transform ${mobileBrandsOpen ? "rotate-180" : ""}`} />
+              </button>
+              {mobileBrandsOpen && (
+                <div className="max-h-[60vh] overflow-y-auto py-2">
+                  {brandGroups.map((g) => (
+                    <div key={g.letter} className="mb-3">
+                      <div className="text-[11px] font-bold tracking-[0.2em] text-rose-gold mb-1 px-1">
+                        {g.letter}
+                      </div>
+                      <ul className="grid grid-cols-2 gap-x-3">
+                        {g.items.map((b) => (
+                          <li key={b}>
+                            <Link
+                              to="/shop"
+                              onClick={() => setOpen(false)}
+                              className="block py-1.5 text-sm text-foreground/80"
+                            >
+                              {b}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </li>
           </ul>
         </nav>
       )}
