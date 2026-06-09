@@ -195,7 +195,38 @@ function ComboOptions() {
     { title: "Botox Keratin Treatment Combo", blurb: "Botox Keratin Mask, Neutralising Shampoo, Conditioner & Herbal Shampoo.", price: "R350", image: comboBotox.url },
     { title: "Afripure Natural Oils Combo", blurb: "Rosemary, Jojoba, Tea Tree, Jamaican Black Castor & Batana hair oils.", price: "R250", was: "R350", image: comboAfripure.url },
   ];
-...
+  return (
+    <section className="relative overflow-hidden bg-gradient-to-b from-plum-deep via-plum to-plum-deep text-primary-foreground py-20">
+      <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_20%_30%,oklch(0.85_0.1_40/0.45),transparent_55%)]" />
+      <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_80%_70%,oklch(0.75_0.15_350/0.5),transparent_55%)]" />
+      <div className="relative mx-auto max-w-7xl px-4">
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <p className="font-script text-2xl text-rose-gold-light mb-1">More beauty, more value</p>
+          <h2 className="text-3xl md:text-5xl font-display">Combo Options</h2>
+          <p className="mt-4 text-white/80">Bundle &amp; save with our exclusive combos — curated sets that deliver beauty, value and confidence in every box.</p>
+        </div>
+
+        <div className="relative rounded-[2rem] overflow-hidden ring-1 ring-rose-gold/40 shadow-glow mb-10">
+          <img
+            src={comboCover.url}
+            alt="Ikamva Edge Ubuhle Combos — bundle and save with exclusive beauty combos"
+            className="w-full h-auto object-cover"
+            width={1536}
+            height={1024}
+          />
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 mb-12">
+          {perks.map(({ icon: I, label }) => (
+            <div key={label} className="flex items-center gap-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur px-4 py-3">
+              <span className="size-10 shrink-0 rounded-xl bg-gradient-rose text-plum-deep flex items-center justify-center">
+                <I className="size-5" />
+              </span>
+              <span className="text-sm font-medium text-white/90">{label}</span>
+            </div>
+          ))}
+        </div>
+
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {combos.map((p) => (
             <div key={p.title} className="group relative rounded-2xl overflow-hidden bg-white/5 border border-white/10 backdrop-blur flex flex-col">
