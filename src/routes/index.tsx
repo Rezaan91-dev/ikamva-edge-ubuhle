@@ -1,10 +1,11 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Sparkles, ShieldCheck, Package, Headphones, Star, Crown, Gift, Truck, BadgeCheck, ShoppingBag } from "lucide-react";
+import { ArrowRight, ArrowLeft, Sparkles, ShieldCheck, Package, Headphones, Star, Crown, Gift, Truck, BadgeCheck, ShoppingBag } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { FEATURED_CATEGORIES } from "@/lib/categories";
 import hero from "@/assets/hero-woman.jpg";
-import comboCover from "@/assets/combo-cover.png.asset.json";
+import comboCover from "@/assets/combo-cover-v2.png.asset.json";
 import comboShampoo from "@/assets/combo-shampoo.jpg.asset.json";
 import comboHerbal from "@/assets/combo-herbal.jpg.asset.json";
 import comboNeutralising from "@/assets/combo-neutralising.png.asset.json";
@@ -227,23 +228,8 @@ function ComboOptions() {
           ))}
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {combos.map((p) => (
-            <div key={p.title} className="group relative rounded-2xl overflow-hidden bg-white/5 border border-white/10 backdrop-blur flex flex-col">
-              <div className="aspect-[2/3] overflow-hidden bg-plum-deep">
-                <img src={p.image} alt={p.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              </div>
-              <div className="p-5 flex flex-col flex-1">
-                <h3 className="font-display text-lg text-white leading-tight">{p.title}</h3>
-                <p className="mt-2 text-sm text-white/70 leading-relaxed flex-1">{p.blurb}</p>
-                <div className="mt-4 flex items-baseline gap-2">
-                  <span className="font-display text-2xl text-rose-gold-light">{p.price}</span>
-                  {p.was && <span className="text-sm text-white/50 line-through">{p.was}</span>}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <ComboCarousel combos={combos} />
+
 
         <div className="text-center mt-12">
           <Link to="/shop" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-rose-gold text-plum-deep font-semibold shadow-glow hover:bg-rose-gold-light transition-colors">
@@ -253,6 +239,95 @@ function ComboOptions() {
         </div>
       </div>
     </section>
+  );
+}
+
+type Combo = { title: string; blurb: string; price: string; was?: string; image: string };
+
+function ComboCarousel({ combos }: { combos: Combo[] }) {
+  const [index, setIndex] = useState(0);
+  const n = combos.length;
+  const prev = () => setIndex((i) => (i - 1 + n) % n);
+  const next = () => setIndex((i) => (i + 1) % n);
+
+  return (
+    <div className="relative mx-auto max-w-3xl">
+      <div className="relative h-[480px] sm:h-[560px] [perspective:1400px]">
+        {combos.map((c, i) => {
+          const offset = ((i - index) % n + n) % n;
+          const rel = offset > n / 2 ? offset - n : offset;
+          const abs = Math.abs(rel);
+          const isActive = rel === 0;
+          const visible = abs <= 2;
+          const translateX = rel * 60;
+          const translateZ = -abs * 120;
+          const rotateY = rel * -8;
+          const scale = 1 - abs * 0.08;
+          return (
+            <button
+              key={c.title}
+              type="button"
+              onClick={() => setIndex(i)}
+              aria-label={`Show ${c.title}`}
+              aria-hidden={!visible}
+              tabIndex={isActive ? 0 : -1}
+              className="absolute inset-0 mx-auto w-[78%] sm:w-[62%] rounded-3xl overflow-hidden transition-all duration-500 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-gold"
+              style={{
+                transform: `translateX(${translateX}%) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`,
+                zIndex: 100 - abs,
+                opacity: visible ? (isActive ? 1 : 0.55) : 0,
+                pointerEvents: visible ? "auto" : "none",
+                boxShadow: isActive
+                  ? "0 40px 80px -20px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,200,150,0.25)"
+                  : "0 25px 50px -15px rgba(0,0,0,0.55)",
+                filter: isActive ? "none" : "brightness(0.7)",
+              }}
+            >
+              <div className="aspect-[2/3] bg-plum-deep relative">
+                <img src={c.image} alt={c.title} className="absolute inset-0 h-full w-full object-cover" />
+                <div className="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-plum-deep via-plum-deep/80 to-transparent text-left">
+                  <h3 className="font-display text-lg sm:text-xl text-white leading-tight">{c.title}</h3>
+                  <p className="mt-1.5 text-xs sm:text-sm text-white/75 leading-relaxed line-clamp-2">{c.blurb}</p>
+                  <div className="mt-3 flex items-baseline gap-2">
+                    <span className="font-display text-2xl text-rose-gold-light">{c.price}</span>
+                    {c.was && <span className="text-sm text-white/50 line-through">{c.was}</span>}
+                  </div>
+                </div>
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
+      <button
+        type="button"
+        onClick={prev}
+        aria-label="Previous combo"
+        className="absolute left-0 sm:-left-4 top-1/2 -translate-y-1/2 z-[200] size-12 sm:size-14 rounded-full bg-rose-gold text-plum-deep flex items-center justify-center shadow-glow hover:bg-rose-gold-light transition-colors"
+      >
+        <ArrowLeft className="size-5 sm:size-6" />
+      </button>
+      <button
+        type="button"
+        onClick={next}
+        aria-label="Next combo"
+        className="absolute right-0 sm:-right-4 top-1/2 -translate-y-1/2 z-[200] size-12 sm:size-14 rounded-full bg-rose-gold text-plum-deep flex items-center justify-center shadow-glow hover:bg-rose-gold-light transition-colors"
+      >
+        <ArrowRight className="size-5 sm:size-6" />
+      </button>
+
+      <div className="mt-6 flex justify-center gap-2">
+        {combos.map((c, i) => (
+          <button
+            key={c.title}
+            type="button"
+            onClick={() => setIndex(i)}
+            aria-label={`Go to combo ${i + 1}`}
+            className={`h-1.5 rounded-full transition-all ${i === index ? "w-8 bg-rose-gold" : "w-2 bg-white/30 hover:bg-white/50"}`}
+          />
+        ))}
+      </div>
+    </div>
   );
 }
 
