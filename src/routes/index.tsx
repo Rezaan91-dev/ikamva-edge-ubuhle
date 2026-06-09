@@ -329,6 +329,7 @@ function ComboCarousel({ combos }: { combos: Combo[] }) {
       </div>
     </div>
   );
+}
 
 
 function Testimonials() {
