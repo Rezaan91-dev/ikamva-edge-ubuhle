@@ -84,6 +84,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:site_name", content: "Ikamva Edge Ubuhle" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "Ikamva Edge Ubuhle — Elevating Beauty, Empowering Confidence" },
+      { name: "twitter:title", content: "Ikamva Edge Ubuhle — Elevating Beauty, Empowering Confidence" },
+      { property: "og:description", content: "South Africa's destination for premium beauty, haircare, skincare, wellness and everyday essentials from nearly 200 trusted brands." },
+      { name: "twitter:description", content: "South Africa's destination for premium beauty, haircare, skincare, wellness and everyday essentials from nearly 200 trusted brands." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/b8b9f4a2-8924-43fe-8dcd-9ad38a504487" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/b8b9f4a2-8924-43fe-8dcd-9ad38a504487" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
