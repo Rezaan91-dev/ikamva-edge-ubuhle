@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ShopSidebar } from "@/components/ShopSidebar";
 import { FEATURED_CATEGORIES, SHOP_CATEGORIES } from "@/lib/categories";
+import { BRANDS, groupBrandsByLetter } from "@/lib/brands";
 import { ArrowRight, SlidersHorizontal } from "lucide-react";
 import { useState } from "react";
 
@@ -44,13 +45,13 @@ function Shop() {
             className="lg:hidden mb-4 inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-border/60 bg-card text-sm font-medium hover:bg-blush/40 transition-colors"
           >
             <SlidersHorizontal className="size-4" />
-            All Categories
+            Browse Categories & Brands
           </button>
 
           {mobileFiltersOpen && (
-            <div className="lg:hidden mb-6 rounded-2xl border border-border/60 bg-card p-4 shadow-soft">
+            <div className="lg:hidden mb-6 rounded-2xl border border-border/60 bg-card p-4 shadow-soft max-h-[80vh] overflow-y-auto">
               <h3 className="font-display text-lg text-plum-deep mb-3">All Categories</h3>
-              <nav className="space-y-0.5 max-h-72 overflow-y-auto">
+              <nav className="space-y-0.5 mb-6">
                 {SHOP_CATEGORIES.map((cat) => (
                   <Link
                     key={cat}
@@ -63,6 +64,28 @@ function Shop() {
                   </Link>
                 ))}
               </nav>
+
+              <h3 className="font-display text-lg text-plum-deep mb-3">All Brands</h3>
+              {Object.entries(groupBrandsByLetter(BRANDS)).sort(([a], [b]) => a.localeCompare(b)).map(([letter, brands]) => (
+                <div key={letter} className="mb-3">
+                  <span className="inline-block px-2 py-0.5 rounded-md bg-plum-deep/10 text-plum-deep text-[10px] font-bold uppercase tracking-wider mb-1">
+                    {letter}
+                  </span>
+                  <nav className="space-y-0.5">
+                    {brands.map((brand) => (
+                      <Link
+                        key={brand}
+                        to="/brands"
+                        onClick={() => setMobileFiltersOpen(false)}
+                        className="flex items-center justify-between px-3 py-2 rounded-xl text-sm text-foreground/80 hover:bg-blush/50 hover:text-plum-deep transition-colors"
+                      >
+                        <span>{brand}</span>
+                        <ArrowRight className="size-3.5 text-muted-foreground/60" />
+                      </Link>
+                    ))}
+                  </nav>
+                </div>
+              ))}
             </div>
           )}
 
