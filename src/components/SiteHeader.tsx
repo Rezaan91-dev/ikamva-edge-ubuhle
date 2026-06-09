@@ -51,7 +51,7 @@ export function SiteHeader() {
           <img src={logo.url} alt="Ikamva Edge Ubuhle" className="h-11 w-11 rounded-full object-cover ring-1 ring-rose-gold/40" />
           <div className="leading-tight hidden sm:block">
             <div className="font-display text-lg text-plum-deep">Ikamva Edge Ubuhle</div>
-            <div className="text-[10px] tracking-[0.25em] uppercase text-muted-foreground">Beauty · Self-Care</div>
+            <div className="text-[10px] tracking-[0.25em] uppercase text-muted-foreground">Elevating Beauty, Empowering Confidence.</div>
           </div>
         </Link>
 
