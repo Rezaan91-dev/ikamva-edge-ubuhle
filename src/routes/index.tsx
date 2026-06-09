@@ -5,7 +5,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { FEATURED_CATEGORIES } from "@/lib/categories";
 import hero from "@/assets/hero-woman.jpg";
-import comboCover from "@/assets/combo-cover-v2.png.asset.json";
+import comboCover from "@/assets/combo-cover-v3.png.asset.json";
 import comboShampoo from "@/assets/combo-shampoo.jpg.asset.json";
 import comboHerbal from "@/assets/combo-herbal.jpg.asset.json";
 import comboNeutralising from "@/assets/combo-neutralising.png.asset.json";
