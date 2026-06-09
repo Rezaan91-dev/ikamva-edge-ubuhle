@@ -29,7 +29,7 @@ function Index() {
       <Marquee />
       <Categories />
       <WhyShop />
-      <BrandTeaser />
+      <ComboOptions />
       <Testimonials />
       <Newsletter />
       <SiteFooter />
