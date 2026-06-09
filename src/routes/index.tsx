@@ -329,8 +329,9 @@ function ComboCarousel({ combos }: { combos: Combo[] }) {
       </div>
     </div>
   );
-}
 
+
+function Testimonials() {
   const t = [
     { name: "Lerato M.", city: "Johannesburg", quote: "Finally a South African beauty destination that takes hair and skin seriously. My orders always arrive perfectly packaged." },
     { name: "Nokuthula D.", city: "Durban", quote: "Their range is unmatched — I found brands I had been searching everywhere for. The site feels like a luxury experience." },
