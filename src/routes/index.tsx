@@ -3,6 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowLeft, Sparkles, ShieldCheck, Package, Headphones, Star, Crown, Gift, Truck, BadgeCheck, ShoppingBag } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import PromoPopups from "@/components/PromoPopups";
 import { FEATURED_CATEGORIES } from "@/lib/categories";
 import hero from "@/assets/hero-woman.jpg";
 import comboCover from "@/assets/combo-cover-v3.png.asset.json";
@@ -40,6 +41,7 @@ function Index() {
       <Testimonials />
       <Newsletter />
       <SiteFooter />
+      <PromoPopups />
     </div>
   );
 }
