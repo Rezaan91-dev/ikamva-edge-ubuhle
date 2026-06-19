@@ -65,7 +65,7 @@ export function SiteHeader() {
             >
               <Link
                 to={n.to}
-                className="inline-flex items-center gap-1 text-foreground/80 hover:text-plum transition-colors [&.active]:text-plum"
+                className="inline-flex items-center gap-1 text-foreground/80 hover:text-plum transition-colors relative py-1 [&.active]:text-plum-deep [&.active]:font-semibold [&.active]:tracking-wide after:[&.active]:content-[''] after:[&.active]:absolute after:[&.active]:bottom-0 after:[&.active]:left-1/2 after:[&.active]:-translate-x-1/2 after:[&.active]:w-5 after:[&.active]:h-0.5 after:[&.active]:rounded-full after:[&.active]:bg-rose-gold"
                 activeProps={{ className: "active" }}
                 activeOptions={{ exact: n.to === "/" }}
               >
@@ -134,7 +134,9 @@ export function SiteHeader() {
                 <Link
                   to={n.to}
                   onClick={() => setOpen(false)}
-                  className="block py-3 text-base text-foreground/90 border-b border-border/40 last:border-0"
+                  className="block py-3 text-base text-foreground/90 border-b border-border/40 last:border-0 [&.active]:text-plum-deep [&.active]:font-semibold [&.active]:tracking-wide"
+                  activeProps={{ className: "active" }}
+                  activeOptions={{ exact: n.to === "/" }}
                 >
                   {n.label}
                 </Link>
