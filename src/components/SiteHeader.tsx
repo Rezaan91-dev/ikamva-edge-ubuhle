@@ -134,7 +134,9 @@ export function SiteHeader() {
                 <Link
                   to={n.to}
                   onClick={() => setOpen(false)}
-                  className="block py-3 text-base text-foreground/90 border-b border-border/40 last:border-0"
+                  className="block py-3 text-base text-foreground/90 border-b border-border/40 last:border-0 [&.active]:text-plum-deep [&.active]:font-semibold [&.active]:tracking-wide"
+                  activeProps={{ className: "active" }}
+                  activeOptions={{ exact: n.to === "/" }}
                 >
                   {n.label}
                 </Link>
