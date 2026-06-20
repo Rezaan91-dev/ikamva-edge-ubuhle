@@ -2,6 +2,9 @@ import { useState } from "react";
 import { X } from "lucide-react";
 
 const WHATSAPP_NUMBER = "27000000000";
+const WHATSAPP_PREFILL = encodeURIComponent(
+  "Hi Ikamva Edge Ubuhle! I'm interested in your products and would love some assistance."
+);
 
 export function WhatsAppFloat() {
   const [open, setOpen] = useState(false);
