@@ -110,20 +110,21 @@ export function SiteHeader() {
         </nav>
 
         <div className="ml-auto flex items-center gap-1">
-          <div className="hidden lg:flex items-center gap-2 px-3 py-2 rounded-full bg-muted/60 border border-border/50 w-72">
+          <Link
+            to="/search"
+            aria-label="Search"
+            className="hidden lg:flex items-center gap-2 px-3 py-2 rounded-full bg-muted/60 border border-border/50 w-72 hover:border-rose-gold transition-colors"
+          >
             <Search className="size-4 text-muted-foreground" />
-            <input
-              placeholder="Search products, brands…"
-              className="bg-transparent text-sm outline-none flex-1 placeholder:text-muted-foreground/70"
-            />
-          </div>
-          <button aria-label="Search" className="lg:hidden p-2 hover:text-plum"><Search className="size-5" /></button>
-          <button aria-label="Account" className="p-2 hover:text-plum"><User className="size-5" /></button>
-          <button aria-label="Wishlist" className="p-2 hover:text-plum"><Heart className="size-5" /></button>
-          <button aria-label="Cart" className="relative p-2 hover:text-plum">
+            <span className="text-sm text-muted-foreground/70 flex-1 text-left">Search products, brands…</span>
+          </Link>
+          <Link to="/search" aria-label="Search" className="lg:hidden p-2 hover:text-plum"><Search className="size-5" /></Link>
+          <Link to="/account" aria-label="Account" className="p-2 hover:text-plum"><User className="size-5" /></Link>
+          <Link to="/wishlist" aria-label="Wishlist" className="p-2 hover:text-plum"><Heart className="size-5" /></Link>
+          <Link to="/cart" aria-label="Cart" className="relative p-2 hover:text-plum">
             <ShoppingBag className="size-5" />
             <span className="absolute top-1 right-1 size-4 rounded-full bg-rose-gold text-[10px] font-bold text-plum-deep flex items-center justify-center">0</span>
-          </button>
+          </Link>
         </div>
       </div>
       {open && (
