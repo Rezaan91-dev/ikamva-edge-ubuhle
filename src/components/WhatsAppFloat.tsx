@@ -2,6 +2,9 @@ import { useState } from "react";
 import { X } from "lucide-react";
 
 const WHATSAPP_NUMBER = "27000000000";
+const WHATSAPP_PREFILL = encodeURIComponent(
+  "Hi Ikamva Edge Ubuhle! I'm interested in your products and would love some assistance."
+);
 
 export function WhatsAppFloat() {
   const [open, setOpen] = useState(false);
@@ -20,7 +23,7 @@ export function WhatsAppFloat() {
             Hi there! How can we help you today?
           </p>
           <a
-            href={`https://wa.me/${WHATSAPP_NUMBER}`}
+            href={`https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_PREFILL}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center w-full gap-2 rounded-full bg-whatsapp px-4 py-2.5 text-sm font-semibold text-white hover:bg-whatsapp-dark transition-colors"
