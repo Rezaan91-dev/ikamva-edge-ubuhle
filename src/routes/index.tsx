@@ -34,8 +34,6 @@ function Index() {
     <div className="min-h-screen">
       <SiteHeader />
       <Hero />
-      <Marquee />
-      <Categories />
       <WhyShop />
       <ComboOptions />
       <Testimonials />
