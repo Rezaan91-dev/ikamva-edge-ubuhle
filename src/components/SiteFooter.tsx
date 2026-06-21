@@ -83,8 +83,15 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-3 justify-between items-center pt-6 border-t border-white/10 text-xs text-white/60">
-          <p>© {new Date().getFullYear()} Ikamva Edge Ubuhle. All rights reserved.</p>
+        <div className="flex flex-col md:flex-row gap-4 justify-between items-center pt-6 border-t border-white/10 text-xs text-white/60">
+          <div className="flex items-center gap-3">
+            <img
+              src={footerLogo.url}
+              alt="Ikamva Edge Ubuhle logo"
+              className="h-8 w-8 rounded-full ring-1 ring-rose-gold/40 object-cover"
+            />
+            <p>© {new Date().getFullYear()} Ikamva Edge Ubuhle. All rights reserved.</p>
+          </div>
           <div className="flex gap-4">
             <span>VISA</span><span>MASTERCARD</span><span>PAYFAST</span><span>OZOW</span><span>EFT</span>
           </div>
