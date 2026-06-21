@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Facebook, Mail, MessageCircle, ShieldCheck, Truck, CreditCard } from "lucide-react";
 import logo from "@/assets/ikamva-logo.png.asset.json";
+import footerLogo from "@/assets/footer-ieu-logo.png.asset.json";
 
 export function SiteFooter() {
   return (
