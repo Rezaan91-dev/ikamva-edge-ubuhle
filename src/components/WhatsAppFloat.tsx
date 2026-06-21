@@ -1,13 +1,35 @@
 import { useState } from "react";
 import { X } from "lucide-react";
+import { useLocation } from "@tanstack/react-router";
 
 const WHATSAPP_NUMBER = "27000000000";
-const WHATSAPP_PREFILL = encodeURIComponent(
-  "Hi Ikamva Edge Ubuhle! I'm interested in your products and would love some assistance."
-);
+
+const PAGE_MESSAGES: Record<string, string> = {
+  "/": "Hi Ikamva Edge Ubuhle! I just discovered your store and would love some help finding the perfect products for me.",
+  "/about": "Hi Ikamva Edge Ubuhle! I was reading about your brand story and would love to learn more about what you offer.",
+  "/shop": "Hi Ikamva Edge Ubuhle! I'm browsing your shop and have a few questions about your products before I place an order.",
+  "/journal": "Hi Ikamva Edge Ubuhle! I enjoyed reading your journal and would love to hear more about your latest arrivals and tips.",
+  "/contact": "Hi Ikamva Edge Ubuhle! I visited your contact page and thought I'd reach out directly for a quicker response.",
+  "/account": "Hi Ikamva Edge Ubuhle! I need some help with my account, orders, or wishlist — could you assist me please?",
+  "/wishlist": "Hi Ikamva Edge Ubuhle! I have some items saved in my wishlist and would love more details before I buy.",
+  "/cart": "Hi Ikamva Edge Ubuhle! I'm about to checkout and have a quick question about my cart and delivery.",
+  "/search": "Hi Ikamva Edge Ubuhle! I was searching your store and need a little guidance finding exactly what I'm looking for.",
+  "/brands": "Hi Ikamva Edge Ubuhle! I was exploring your brands and would love recommendations on what suits me best.",
+  "/trust": "Hi Ikamva Edge Ubuhle! I saw your trust & authenticity info and would love to confirm a few things before ordering.",
+};
+
+function getPrefillMessage(pathname: string): string {
+  const message = PAGE_MESSAGES[pathname];
+  if (message) return encodeURIComponent(message);
+  return encodeURIComponent(
+    "Hi Ikamva Edge Ubuhle! I'm interested in your products and would love some assistance."
+  );
+}
 
 export function WhatsAppFloat() {
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const prefill = getPrefillMessage(location.pathname);
 
   return (
     <div className="fixed bottom-6 right-6 z-[60] flex flex-col items-end gap-3">
@@ -23,7 +45,7 @@ export function WhatsAppFloat() {
             Hi there! How can we help you today?
           </p>
           <a
-            href={`https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_PREFILL}`}
+            href={`https://wa.me/${WHATSAPP_NUMBER}?text=${prefill}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center w-full gap-2 rounded-full bg-whatsapp px-4 py-2.5 text-sm font-semibold text-white hover:bg-whatsapp-dark transition-colors"
